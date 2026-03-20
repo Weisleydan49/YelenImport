@@ -1,12 +1,13 @@
-from fastapi import FastAPI 
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.routers import products, quotes, contact, how_it_works
-from app.core import config
+from app.routers import users, auth, products, search, quotes, contact, cart, orders, favourites, how_it_works
+from app.core.config import settings
 from app.db.session import engine
-from app.models import Base
+from app.db.base import Base
+
 
 app = FastAPI(
-    title = config.YELENIMPORT,
+    title = settings.APP_NAME,
     description = "Yelen Import API",
     version = "0.0.1",
 )
@@ -23,10 +24,16 @@ app.add_middleware(
 def startup_event():
     Base.metadata.create_all(bind=engine)
 #include routers
-app.include_router(products.router, prefix = "/api/products", tags = ["products"])
-app.include_router(quotes.router, prefix = "/api/qoutes", tags = ["qoutes"])
-app.include_router(contacts.router, prefix = "/api/contacts", tags = ["contacts"])
-app.include_router(how_it_works.router, prefix = "/api/how_it_works", tags = ["how_it_works"])
+app.include_router(users.router, prefix = "/users", tags = ["users"])
+app.include_router(auth.router, prefix = "/auth", tags = ["auth"])
+app.include_router(products.router, prefix = "/products", tags = ["products"])
+app.include_router(search.router, prefix = "/search", tags = ["search"])
+app.include_router(quotes.router, prefix = "/quotes", tags = ["quotes"])
+app.include_router(contact.router, prefix = "/contact", tags = ["contact"])
+app.include_router(cart.router, prefix = "/cart", tags = ["cart"])
+app.include_router(orders.router, prefix = "/orders", tags = ["orders"])
+app.include_router(favourites.router, prefix = "/favourites", tags = ["favourites"])
+app.include_router(how_it_works.router, prefix = "/how-it-works", tags = ["how-it-works"])
 
 @app.get("/")
 def root():
