@@ -2,7 +2,7 @@ from pydantic import BaseModel, Field
 from datetime import datetime
 
 class CartProductCreate(BaseModel):
-    product_id: int
+    product_id: str
     quantity: int
 
 class CartProductUpdate(BaseModel):
@@ -10,7 +10,7 @@ class CartProductUpdate(BaseModel):
 
 class CartProductOut(BaseModel):
     id: int
-    product_id: int
+    product_id: str
     quantity: int
     added_at: datetime
 

@@ -7,7 +7,7 @@ class ContactCreate(BaseModel):
     phone: str
 
 class ContactOut(BaseModel):
-    id: int
+    id: str
     name: str
     email: EmailStr
     phone: str

@@ -8,6 +8,6 @@ async def get_products():
     return {"products": []}
 
 @router.get("/{product_id}")
-async def get_product(product_id: int):
+async def get_product(product_id: str):
     """Get a specific product"""
     return {"product_id": product_id}
